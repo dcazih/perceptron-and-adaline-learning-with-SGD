@@ -24,6 +24,7 @@ class AdalineGD:
         self.n_iter = n_iter
         self.random_state = random_state
 
+
     def fit(self, X, y):
         """ Fit training data.
         Training Simple Machine Learning Algorithms for Classification40
@@ -46,7 +47,11 @@ class AdalineGD:
         self.b_ = np.float_(0.)
         self.losses_ = [] # because adaline implements a loss function
 
-        for i in range(self.n_iter):
+        print("\nTraining Adaline:")
+        for epoch in range(self.n_iter):
+            print("Epoch:", epoch, "/", self.n_iter)
+
+
             # Compute pre/activation functions
             net_input = self.net_input(X)
             output = self.activation(net_input)
