@@ -42,52 +42,22 @@ X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 
 
-#### Train and plot prediction results
-
-# Train our models on same data: Perceptron and AdalineGD
-# perceptron = Perceptron()
-# perceptron.fit(X_train, y_train)
-#
-# adaline = AdalineGD()
-# adaline.fit(X_train, y_train)
-
-# Create a figure with 1 row and 2 columns
-fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
-
-ptrn = Perceptron().fit(X, y)
-# Plot the number of misclassifications for each epoch
-ax[0].plot(range(1, len(ptrn.errors_) + 1), ptrn.errors_, marker='o')
-ax[0].set_xlabel('Epochs')
-ax[0].set_ylabel('Number of misclassifications')
-ax[0].set_title('Perceptron: Misclassifications per Epoch')
-
-adal = AdalineGD().fit(X, y)
-# Plot the mean squared error for each epoch
-ax[1].plot(range(1, len(adal.losses_) + 1), adal.losses_, marker='o')
-ax[1].set_xlabel('Epochs')
-ax[1].set_ylabel('Mean Squared Error')
-ax[1].set_title('Adaline: Mean Squared Error per Epoch')
-
-plt.show()
-
-
 #### Train models
 
 ppn = Perceptron()
 ppn.fit(X_train_std, y_train)
+print()
 
 ada = AdalineGD()
 ada.fit(X_train_std, y_train)
-print("\n")
+print()
 
 
 #### Plots to help compare the two models
 
-ppn_y_pred = ppn.predict(X_test_std)
-print('Perceptron misclassified examples: %d' % (y_test != ppn_y_pred).sum())
-
-ada_y_pred = ada.predict(X_test_std)
-print('Adaline misclassified examples: %d' % (y_test != ada_y_pred).sum())
+# Misclassifications
+print('Perceptron misclassified examples: %d' % (y_test != ppn.predict(X_test_std)).sum())
+print('Adaline misclassified examples: %d' % (y_test != ada.predict(X_test_std)).sum())
 
 # Plot convergence (errors and loss)
 plt.figure(figsize=(12, 5))
@@ -102,6 +72,7 @@ plt.plot(range(1, len(ada.losses_) + 1), ada.losses_, marker='o')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.title('Adaline - Loss per epoch')
+
 plt.show()
 
 # Decision boundary plots
@@ -111,6 +82,5 @@ plot_decision_boundary(ada, X_train_std, y_train, "Adaline Decision Boundary")
 # Print margin (w norm inverse)
 ppn_margin = 1 / np.linalg.norm(ppn.w_)
 ada_margin = 1 / np.linalg.norm(ada.w_)
-
 print(f"Perceptron margin: {ppn_margin:.4f}")
 print(f"Adaline margin: {ada_margin:.4f}")
