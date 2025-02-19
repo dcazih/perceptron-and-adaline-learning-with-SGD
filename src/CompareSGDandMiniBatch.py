@@ -5,7 +5,6 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from models.AdalineSGD import AdalineSGD
-from models.AdalineMiniBatchSGD import AdalineMiniBatchSGD
 
 
 def plot_decision_boundary(model, X, y, title):
@@ -43,26 +42,26 @@ X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 
 
-adaSGD = AdalineSGD()
-adaSGD.fit(X_train_std, y_train)
+adaline1 = AdalineSGD()
+adaline1.fit_SGD(X_train_std, y_train)
 
-adaMBSGD = AdalineMiniBatchSGD()
-adaMBSGD.fit(X_train_std, y_train)
+adaline2 = AdalineSGD()
+adaline2.fit_mini_batch_SGD(X_train_std, y_train)
 
 # Misclassifications
-print('SGD misclassified examples: %d' % (y_test != adaSGD.predict(X_test_std)).sum())
-print('Mini-Batch SGD misclassified examples: %d' % (y_test != adaMBSGD.predict(X_test_std)).sum())
+print('SGD misclassified examples: %d' % (y_test != adaline1.predict(X_test_std)).sum())
+print('Mini-Batch SGD misclassified examples: %d' % (y_test != adaline2.predict(X_test_std)).sum())
 
 # Plot convergence (errors and loss)
 plt.figure(figsize=(12, 5))
 plt.subplot(1, 2, 1)
-plt.plot(range(1, len(adaSGD.losses_) + 1), adaSGD.losses_, marker='o')
+plt.plot(range(1, len(adaline1.losses_) + 1), adaline1.losses_, marker='o')
 plt.xlabel('Epochs')
 plt.ylabel('Number of updates')
 plt.title('SGD - Loss per epoch')
 
 plt.subplot(1, 2, 2)
-plt.plot(range(1, len(adaMBSGD.losses_) + 1), adaMBSGD.losses_, marker='o')
+plt.plot(range(1, len(adaline2.losses_) + 1), adaline2.losses_, marker='o')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.title('Mini-Batch SGD - Loss per epoch')
@@ -70,11 +69,11 @@ plt.title('Mini-Batch SGD - Loss per epoch')
 plt.show()
 
 # Decision boundary plots
-plot_decision_boundary(adaSGD, X_train_std, y_train, "SGD Decision Boundary")
-plot_decision_boundary(adaMBSGD, X_train_std, y_train, "Mini-Batch SGD Decision Boundary")
+plot_decision_boundary(adaline1, X_train_std, y_train, "SGD Decision Boundary")
+plot_decision_boundary(adaline2, X_train_std, y_train, "Mini-Batch SGD Decision Boundary")
 
 # Print margin (w norm inverse)
-sgd_margin = 1 / np.linalg.norm(adaSGD.w_)
-msgd_margin = 1 / np.linalg.norm(adaMBSGD.w_)
+sgd_margin = 1 / np.linalg.norm(adaline1.w_)
+msgd_margin = 1 / np.linalg.norm(adaline2.w_)
 print(f"SGD margin: {sgd_margin:.4f}")
 print(f"Mini-Batch SGD margin: {msgd_margin:.4f}")
