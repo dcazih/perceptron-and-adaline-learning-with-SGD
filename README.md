@@ -2,6 +2,21 @@
 
 **Dmitri Azih** and **Dylan Rivas**
 
+# Purposes
+
+- Understanding perceptron learning and Adaline algorithms.
+- Investigating the performance difference of the two algorithms.
+- Understanding the linear classification problem.
+- Understanding mini-batch Stochastic Gradient Descent (SGD).
+
+# Implementation Tasks
+
+1. Compare the loss, updates, margin, and convergence of perceptron learning and Adaline using the Iris dataset (first 2 classes), ensuring the same initial parameters, data, learning rate, and epochs, and provide at least 3 mathematical conclusions.
+2. Modify the Perceptron class to absorb the bias term into the weight vector `w` while ensuring compatibility with the textbook's training program.
+3. Use multiple perceptrons for multiclass classification of the Iris dataset (all features), by adapting the Perceptron class developed in Task 2 to handle this task.
+4. Implement a `fit_mini_batch_SGD` function in the AdalineSGD class, combining SGD and mini-batch GD to update learning parameters based on a randomly selected subset of the training data in each epoch.
+
+
 ## 1. Comprehensive Comparison: Perceptron & Adaline
 
 For Task 1, we provide a comprehensive analysis comparing the performance of the Perceptron and Adaline algorithms on their performance factors. From this, we’ll draw meaningful mathematically supported conclusions regarding the behavior of these two learning models. We’ll draw three conclusions based on the following model performance factors: convergence speed, number of updates, and margin of separation (hyperplane).
