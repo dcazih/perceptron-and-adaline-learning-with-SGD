@@ -1,4 +1,4 @@
-# Project Report: Studies of Perceptron Learning and Adaline
+# Report: Studies of Perceptron Learning and Adaline
 
 **Dmitri Azih** and **Dylan Rivas**
 
