@@ -74,7 +74,10 @@ For Task 3, we used the Perceptron model with the absorbed bias to perform Multi
 For Task 4, we compared the performance of mini-batch SGD to SGD and GD based on the same initial parameter values, training data, learning rate, and number of epochs. After calculating misclassifications and plotting losses, we can see a clear outperformer: mini-batch SGD.
 
 ![Loss per Epoch](./loss_per_epoch.png)
-**Figure 1. Loss per epoch plot of SGD and mini-batch SGD**
+<p align="center">
+  **Figure 1. Loss per epoch plot of SGD and mini-batch SGD**
+</p>
+
 
 We can see the loss for mini-batch SGD decreases quickly within a few epochs and stabilizes around 20 epochs. SGD’s loss also decreases quickly but is subject to more fluctuations and doesn’t converge as smoothly. SGD’s noise makes sense when we consider that its update rule updates after every sample, making it more sensitive. It seems like mini-batch SGD’s batches of data lead to a more stable loss curve.
 When tested for misclassifications post-training, mini-batch SGD had 22 misclassified samples out of 45, while SGD had 27. Although the number of misclassifications seems high compared to the Perceptron and Adaline’s performance, this is truly due to the learning rate not being optimized for each model. Lastly, mini-batch SGD converged at a lower loss value than SGD (as seen in figure 1), making it by far the most superior model we have tested.
