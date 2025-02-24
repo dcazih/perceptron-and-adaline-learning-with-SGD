@@ -75,7 +75,7 @@ For Task 4, we compared the performance of mini-batch SGD to SGD and GD based on
 
 ![Loss per Epoch](./loss_per_epoch.png)
 <p align="center">
-  **Figure 1. Loss per epoch plot of SGD and mini-batch SGD**
+ Figure 1. Loss per epoch plot of SGD and mini-batch SGD
 </p>
 
 
